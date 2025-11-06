@@ -11,6 +11,7 @@ var path = require('path');
  * @returns {{releaseConfig}}
  */
 function deploymentConfigGenerator(deploymentConfig, outputPath) {
+    try{
     var shouldDeploy = false;
     var releaseConfig = {};
     releaseConfig.appConfig = {};
@@ -38,6 +39,11 @@ function deploymentConfigGenerator(deploymentConfig, outputPath) {
     });
 
     return releaseConfig;
+} catch(err)
+{
+    console.error("Error generating deployment config:", err.message);
+        process.exit(1);
+}
 }
 
 module.exports = deploymentConfigGenerator;
